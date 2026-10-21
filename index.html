@@ -422,6 +422,22 @@
 }
 @media(max-width:350px){#rsvpForm .choices{flex-direction:column}}
 
+
+/* Clear RSVP submission feedback without changing the gold pill design. */
+#rsvpSubmit{display:flex;align-items:center;justify-content:center;gap:11px;position:relative;transition:filter .2s ease,box-shadow .2s ease}
+#rsvpSubmit .rsvp-submit__spinner{
+  display:none;flex:0 0 18px;width:18px;height:18px;
+  border:2px solid rgba(53,22,37,.22);border-top-color:#462033;
+  border-radius:50%;animation:rsvp-submit-spin .75s linear infinite;
+}
+#rsvpSubmit.is-loading .rsvp-submit__spinner{display:block}
+#rsvpSubmit.is-loading{cursor:progress;filter:saturate(.88);box-shadow:0 8px 24px #15040c48}
+#rsvpSubmit:disabled{opacity:1}
+@keyframes rsvp-submit-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){
+  #rsvpSubmit .rsvp-submit__spinner{animation:none;border-color:#46203366;border-top-color:#462033}
+}
+
 </style>
 </head>
 <body>
@@ -490,7 +506,10 @@
     <label class="field-label" for="rsvpMessage">A LITTLE NOTE <span class="optional-mark">(OPTIONAL)</span></label>
     <textarea id="rsvpMessage" class="field-input" name="message" maxlength="400" placeholder="A message or reason, if you'd like..."></textarea>
   </div>
-  <button type="submit" class="pill pill--gold" id="rsvpSubmit">Send my RSVP</button>
+  <button type="submit" class="pill pill--gold" id="rsvpSubmit">
+    <span class="rsvp-submit__spinner" aria-hidden="true"></span>
+    <span id="rsvpSubmitLabel">Send my RSVP</span>
+  </button>
   <p class="note" id="rsvpDisclosure">Your RSVP is saved privately for Sherin and Dibiya.</p>
   <div class="toast form-submit-status" id="rsvpResult" role="status" aria-live="polite"></div>
 </form>
@@ -590,6 +609,12 @@ async function sendBethlehem(data){
 
 const rsvpForm=document.getElementById("rsvpForm");
 const rsvpButton=document.getElementById("rsvpSubmit");
+const rsvpButtonLabel=document.getElementById("rsvpSubmitLabel");
+function setRsvpSending(sending){
+  rsvpButton.disabled=sending;
+  rsvpButton.classList.toggle("is-loading",sending);
+  rsvpButtonLabel.textContent=sending?"Sending your RSVP…":"Send my RSVP";
+}
 const rsvpStatus=document.getElementById("rsvpResult");
 const rsvpSuccess=document.getElementById("rsvpSuccess");
 const nameInput=document.getElementById("guestName");
@@ -646,7 +671,7 @@ rsvpForm.addEventListener("submit",async event=>{
     rsvpStatus.textContent="RSVP saving is currently unavailable. Please try again later.";
     return;
   }
-  rsvpButton.disabled=true;rsvpButton.textContent="Sending…";
+  setRsvpSending(true);
   rsvpForm.setAttribute("aria-busy","true");
   rsvpStatus.textContent="Sending your RSVP…";
   try{
@@ -667,7 +692,7 @@ rsvpForm.addEventListener("submit",async event=>{
     rsvpStatus.textContent="We couldn't confirm your RSVP was saved. Please check your connection and try again.";
     console.error("Bethlehem RSVP:",error);
   }finally{
-    rsvpButton.disabled=false;rsvpButton.textContent="Send my RSVP";
+    setRsvpSending(false);
     rsvpForm.removeAttribute("aria-busy");
   }
 });
