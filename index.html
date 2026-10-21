@@ -353,6 +353,22 @@
 @media(max-width:720px){.form-field{margin-bottom:21px}.rsvp-success{gap:15px}.rsvp-success__heading{font-size:clamp(2.35rem,9vw,3.4rem)}}
 @media(prefers-reduced-motion:reduce){.rsvp-success__symbol{animation:none}}
 
+
+/* Portrait chapter: display the complete keys photograph instead of cropping away the handover keys. */
+.story-photo-wrap.is-portrait{background:#2d1724}
+.story-photo-wrap.is-portrait::before{
+  content:"";position:absolute;inset:-26px;pointer-events:none;
+  background:url("assets/bethlehem/07-the-keys-enhanced.webp") center 62% / cover no-repeat;
+  filter:blur(22px) brightness(.42) saturate(.8);
+  transform:scale(1.06);
+}
+.story-photo-wrap.is-portrait #storyMainImage{
+  object-fit:contain;object-position:center;z-index:1;
+}
+@media(max-width:720px){
+  .story-photo-wrap.is-portrait{height:clamp(340px,105vw,470px);min-height:clamp(340px,105vw,470px)}
+}
+
 </style>
 </head>
 <body>
@@ -499,7 +515,7 @@ const story=[
  {src:"09-the-rainbow.webp",title:"A moment of blessing.",desc:"A beautiful double rainbow above Bethlehem. A memory to treasure.",alt:"Double rainbow over the completed home",thumb:"The rainbow"}
 ];const storyStrip=document.getElementById("storyStrip");const storyMainImage=document.getElementById("storyMainImage");let storyIndex=0;let storyChangeToken=0;
 for(let i=0;i<story.length;i++){const chapter=story[i];const button=document.createElement("button");button.type="button";button.className="story-thumb"+(i===0?" is-active":"");button.setAttribute("aria-label",`Show chapter ${i+1}: ${chapter.thumb}`);button.setAttribute("aria-pressed",i===0?"true":"false");const image=document.createElement("img");image.src="assets/bethlehem/"+chapter.src;image.alt="";image.loading="lazy";const title=document.createElement("span");title.textContent=chapter.thumb;button.append(image,title);button.addEventListener("click",()=>setStory(i));storyStrip.append(button)}
-function setStory(i){storyIndex=(i+story.length)%story.length;const chapter=story[storyIndex];const token=++storyChangeToken;storyMainImage.classList.add("is-changing");const image=new Image();image.src="assets/bethlehem/"+chapter.src;const commit=()=>{if(token!==storyChangeToken)return;storyMainImage.src=image.src;storyMainImage.alt=chapter.alt;document.getElementById("storyCount").innerHTML=String(storyIndex+1).padStart(2,"0")+` <span>/ ${String(story.length).padStart(2,"0")}</span>`;document.getElementById("storyTitle").textContent=chapter.title;document.getElementById("storyDescription").textContent=chapter.desc;storyMainImage.classList.remove("is-changing")};if(image.complete)commit();else {image.addEventListener("load",commit,{once:true});image.addEventListener("error",()=>{if(token===storyChangeToken)storyMainImage.classList.remove("is-changing")},{once:true});}const thumbs=[...storyStrip.children];thumbs.forEach((btn,j)=>{btn.classList.toggle("is-active",j===storyIndex);btn.setAttribute("aria-pressed",j===storyIndex?"true":"false")});const target=thumbs[storyIndex],r=target.getBoundingClientRect(),box=storyStrip.getBoundingClientRect();storyStrip.scrollBy({left:(r.left+r.right-box.left-box.right)/2,behavior:reduce.matches?"auto":"smooth"})}
+function setStory(i){storyIndex=(i+story.length)%story.length;const chapter=story[storyIndex];const token=++storyChangeToken;storyMainImage.classList.add("is-changing");const image=new Image();image.src="assets/bethlehem/"+chapter.src;const commit=()=>{if(token!==storyChangeToken)return;storyMainImage.src=image.src;storyMainImage.alt=chapter.alt;storyMainImage.parentElement.classList.toggle("is-portrait",chapter.src==="07-the-keys-enhanced.webp");document.getElementById("storyCount").innerHTML=String(storyIndex+1).padStart(2,"0")+` <span>/ ${String(story.length).padStart(2,"0")}</span>`;document.getElementById("storyTitle").textContent=chapter.title;document.getElementById("storyDescription").textContent=chapter.desc;storyMainImage.classList.remove("is-changing")};if(image.complete)commit();else {image.addEventListener("load",commit,{once:true});image.addEventListener("error",()=>{if(token===storyChangeToken)storyMainImage.classList.remove("is-changing")},{once:true});}const thumbs=[...storyStrip.children];thumbs.forEach((btn,j)=>{btn.classList.toggle("is-active",j===storyIndex);btn.setAttribute("aria-pressed",j===storyIndex?"true":"false")});const target=thumbs[storyIndex],r=target.getBoundingClientRect(),box=storyStrip.getBoundingClientRect();storyStrip.scrollBy({left:(r.left+r.right-box.left-box.right)/2,behavior:reduce.matches?"auto":"smooth"})}
 document.getElementById("storyPrev").addEventListener("click",()=>setStory(storyIndex-1));document.getElementById("storyNext").addEventListener("click",()=>setStory(storyIndex+1));
 
 /* Bethlehem only. Activate with the /exec URL from the dedicated Bethlehem Apps Script.
