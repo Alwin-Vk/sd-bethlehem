@@ -11,7 +11,7 @@ This integration is separate from the wedding site's Sheets, Apps Script and ass
 
 The spreadsheet should remain **private**. Only the Apps Script web app should access it.
 
-## One-time Google Apps Script deployment
+## Existing Google Apps Script deployment (already completed)
 
 1. Open the Bethlehem spreadsheet (not the wedding spreadsheet).
 2. Select **Extensions > Apps Script**.
@@ -20,7 +20,7 @@ The spreadsheet should remain **private**. Only the Apps Script web app should a
 5. Select **Deploy > New deployment > Web app**.
 6. Set **Execute as: Me** and **Who has access: Anyone**.
 7. Authorize access to this dedicated spreadsheet and complete the deployment.
-8. Copy the web app URL ending in **/exec** and send it back in chat. The invitation is not live-connected until this is provided and tested.
+8. The invitation currently uses the independent Bethlehem Apps Script deployment. Only redeploy if changes to the backend code are needed.
 
 ## API
 
