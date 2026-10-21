@@ -361,6 +361,67 @@
   object-position:50% 58%;
 }
 
+
+/* RSVP mobile form polish: shared field geometry, clear spacing and Safari autofill styling. */
+#rsvpForm .form-field{margin:0 0 26px;min-width:0}
+#rsvpForm .field-label{display:flex;align-items:baseline;flex-wrap:wrap;gap:9px;margin:0 0 11px;font-size:11px;line-height:1.5;letter-spacing:.19em}
+#rsvpForm .optional-mark{font-size:10px;font-weight:500;letter-spacing:.09em;color:#e1c7c3;text-transform:uppercase}
+#rsvpForm .field-input{
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+  min-height:55px;
+  margin:0;
+  padding:15px 17px;
+  border:1px solid #e6c99d54;
+  border-radius:14px;
+  outline:0;
+  background:#4d273b;
+  color:#f8eadf;
+  -webkit-text-fill-color:#f8eadf;
+  caret-color:#f8dba7;
+  font:400 16px/1.5 var(--font-body);
+  letter-spacing:0;
+  -webkit-appearance:none;
+  appearance:none;
+  box-shadow:inset 0 1px 0 #ffffff0b,0 5px 16px #19061417;
+  transition:border-color .22s ease,box-shadow .22s ease,background-color .22s ease;
+}
+#rsvpForm .field-input::placeholder{color:#d0b4bc;opacity:1;-webkit-text-fill-color:#d0b4bc}
+#rsvpForm .field-input:focus{
+  border-color:#dfc18c;
+  background:#522b3d;
+  box-shadow:0 0 0 3px #dfc18c20,0 5px 16px #19061417;
+}
+#rsvpForm .field-input:focus-visible{outline:2px solid #dfc18c;outline-offset:2px}
+#rsvpForm textarea.field-input{height:auto;min-height:112px;resize:vertical;padding-block:17px}
+#rsvpForm .choices{margin:0;gap:12px;align-items:stretch}
+#rsvpForm .choice{min-width:0;min-height:54px;font-size:13px;line-height:1.3;padding:12px 14px}
+#rsvpForm .field-error{margin:8px 0 0;padding:0 2px;font-size:12px;line-height:1.45;color:#ffcfbf}
+#rsvpForm .form-field.has-error .field-input{border-color:#efac9f!important;box-shadow:0 0 0 2px #efac9f20}
+#rsvpForm .form-field.has-error .choices{outline-offset:3px}
+#rsvpForm .pill--gold{min-height:56px;margin-top:3px}
+#rsvpForm .note{margin-top:20px;padding:0 4px;line-height:1.65}
+/* iOS/Safari may otherwise force a bright yellow background onto an autofilled name. */
+#rsvpForm input.field-input:-webkit-autofill,
+#rsvpForm input.field-input:-webkit-autofill:hover,
+#rsvpForm input.field-input:-webkit-autofill:focus{
+  -webkit-text-fill-color:#f8eadf!important;
+  caret-color:#f8dba7;
+  -webkit-box-shadow:0 0 0 1000px #4d273b inset!important;
+  box-shadow:0 0 0 1000px #4d273b inset!important;
+  border-color:#dfc18c80;
+  transition:background-color 99999s ease-out 0s;
+}
+@media(max-width:720px){
+  #rsvpForm{padding:clamp(23px,5.5vw,34px);width:100%}
+  #rsvpForm .form-field{margin-bottom:25px}
+  #rsvpForm .choices{flex-direction:row;gap:10px}
+  #rsvpForm .choice{font-size:clamp(11px,3vw,13px);padding:11px 8px}
+  #rsvpForm .field-input{font-size:16px}
+}
+@media(max-width:350px){#rsvpForm .choices{flex-direction:column}}
+
 </style>
 </head>
 <body>
@@ -426,9 +487,8 @@
     <p class="field-error" id="attendanceError" aria-live="polite"></p>
   </div>
   <div class="form-field" id="rsvpMessageField">
-    <label class="field-label" for="rsvpMessage">A LITTLE NOTE <span class="required-mark" aria-hidden="true">*</span></label>
-    <textarea id="rsvpMessage" class="field-input" name="message" required maxlength="400" placeholder="Say hello..." aria-describedby="rsvpMessageError"></textarea>
-    <p class="field-error" id="rsvpMessageError" aria-live="polite"></p>
+    <label class="field-label" for="rsvpMessage">A LITTLE NOTE <span class="optional-mark">(OPTIONAL)</span></label>
+    <textarea id="rsvpMessage" class="field-input" name="message" maxlength="400" placeholder="A message or reason, if you'd like..."></textarea>
   </div>
   <button type="submit" class="pill pill--gold" id="rsvpSubmit">Send my RSVP</button>
   <p class="note" id="rsvpDisclosure">Your RSVP is saved privately for Sherin and Dibiya.</p>
@@ -554,15 +614,12 @@ function attendanceError(message){
 const hasContent=(value,limit)=>value.trim().length>0&&value.trim().length<=limit;
 function validateRsvp(){
   const guest=nameInput.value.trim();
-  const note=noteInput.value.trim();
   const attending=attendanceInputs.some(x=>x.checked);
   fieldError("guestName","guestNameField","guestNameError",
     hasContent(guest,80)?"":"Please enter your name.");
   attendanceError(attending?"":"Please choose whether you can attend.");
-  fieldError("rsvpMessage","rsvpMessageField","rsvpMessageError",
-    hasContent(note,400)?"":"Please write a short note.");
-  const firstInvalid=[nameInput,attendanceInputs[0],noteInput].find((input,i)=>
-    i===0?!hasContent(guest,80):i===1?!attending:!hasContent(note,400));
+  // The note is deliberately optional for both attending and declining guests.
+  const firstInvalid=!hasContent(guest,80)?nameInput:(!attending?attendanceInputs[0]:null);
   if(firstInvalid){firstInvalid.focus({preventScroll:true});
     firstInvalid.scrollIntoView({behavior:reduce.matches?"auto":"smooth",block:"center"});
     return false;
@@ -573,11 +630,6 @@ nameInput.addEventListener("input",()=>{
  if(document.getElementById("guestNameField").classList.contains("has-error"))
   fieldError("guestName","guestNameField","guestNameError",
     hasContent(nameInput.value,80)?"":"Please enter your name.");
-});
-noteInput.addEventListener("input",()=>{
- if(document.getElementById("rsvpMessageField").classList.contains("has-error"))
-  fieldError("rsvpMessage","rsvpMessageField","rsvpMessageError",
-    hasContent(noteInput.value,400)?"":"Please write a short note.");
 });
 attendanceInputs.forEach(input=>input.addEventListener("change",()=>{
  attendanceError(attendanceInputs.some(radio=>radio.checked)?"":"Please choose whether you can attend.");
@@ -622,7 +674,6 @@ rsvpForm.addEventListener("submit",async event=>{
 document.getElementById("rsvpAgain").addEventListener("click",()=>{
   rsvpForm.reset();rsvpStatus.textContent="";rsvpStatus.classList.remove("is-error");
   fieldError("guestName","guestNameField","guestNameError","");
-  fieldError("rsvpMessage","rsvpMessageField","rsvpMessageError","");
   attendanceError("");
   rsvpSuccess.hidden=true;rsvpForm.hidden=false;nameInput.focus();
 });
