@@ -354,19 +354,11 @@
 @media(prefers-reduced-motion:reduce){.rsvp-success__symbol{animation:none}}
 
 
-/* Portrait chapter: display the complete keys photograph instead of cropping away the handover keys. */
-.story-photo-wrap.is-keys{background:#2d1724}
-.story-photo-wrap.is-keys::before{
-  content:"";position:absolute;inset:-26px;pointer-events:none;
-  background:url("assets/bethlehem/07-the-keys-landscape-v2.webp") center / cover no-repeat;
-  filter:blur(22px) brightness(.42) saturate(.8);
-  transform:scale(1.06);
-}
+/* Chapter 07 uses the same edge-to-edge crop as the rest of the journey.
+   Keep its keys centred in the gallery without letterboxing on desktop or mobile. */
 .story-photo-wrap.is-keys #storyMainImage{
-  object-fit:contain;object-position:center;z-index:1;
-}
-@media(max-width:720px){
-  .story-photo-wrap.is-keys{height:clamp(340px,105vw,470px);min-height:clamp(340px,105vw,470px)}
+  object-fit:cover;
+  object-position:50% 58%;
 }
 
 </style>
