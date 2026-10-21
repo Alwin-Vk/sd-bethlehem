@@ -355,18 +355,18 @@
 
 
 /* Portrait chapter: display the complete keys photograph instead of cropping away the handover keys. */
-.story-photo-wrap.is-portrait{background:#2d1724}
-.story-photo-wrap.is-portrait::before{
+.story-photo-wrap.is-keys{background:#2d1724}
+.story-photo-wrap.is-keys::before{
   content:"";position:absolute;inset:-26px;pointer-events:none;
-  background:url("assets/bethlehem/07-the-keys-enhanced.webp") center 62% / cover no-repeat;
+  background:url("assets/bethlehem/07-the-keys-landscape-v2.webp") center / cover no-repeat;
   filter:blur(22px) brightness(.42) saturate(.8);
   transform:scale(1.06);
 }
-.story-photo-wrap.is-portrait #storyMainImage{
+.story-photo-wrap.is-keys #storyMainImage{
   object-fit:contain;object-position:center;z-index:1;
 }
 @media(max-width:720px){
-  .story-photo-wrap.is-portrait{height:clamp(340px,105vw,470px);min-height:clamp(340px,105vw,470px)}
+  .story-photo-wrap.is-keys{height:clamp(340px,105vw,470px);min-height:clamp(340px,105vw,470px)}
 }
 
 </style>
@@ -509,13 +509,13 @@ const story=[
  {src:"04-under-wrap.webp",title:"Taking shape.",desc:"With the roof in place and the structure wrapped, our home was becoming real.",alt:"Front of the home with roofing and protective blue wrap",thumb:"Taking shape"},
  {src:"05-structure.webp",title:"Closer every day.",desc:"The build kept moving forward, one milestone at a time.",alt:"Home under construction with blue exterior wrapping",thumb:"The build"},
  {src:"06-brickwork.webp",title:"Almost home.",desc:"The exterior brickwork and finishing details brought us closer to the day we had imagined.",alt:"Home with completed roof and brickwork during construction",thumb:"Brickwork"},
- {src:"07-the-keys-enhanced.webp",title:"The keys to Bethlehem.",desc:"The long-awaited handover was a moment of gratitude and joy.",alt:"Home keys and flowers on the day of handover",thumb:"The keys"},
+ {src:"07-the-keys-landscape-v2.webp",title:"The keys to Bethlehem.",desc:"The long-awaited handover was a moment of gratitude and joy.",alt:"Home keys and flowers on the day of handover",thumb:"The keys"},
  {src:"08-our-home.webp",title:"Our dream, together.",desc:"At last, a home to call our own and a new chapter to share.",alt:"Sherin and Dibiya together outside their completed home",thumb:"Our home"},
  {src:"09-paalukaachal.png",title:"Paalukaachal.",desc:"Our traditional first boiling of milk in the new kitchen, welcoming blessings and a new beginning at Bethlehem.",alt:"A couple by the stove during Paalukaachal, the traditional first milk boiling in their new home",thumb:"Paalukaachal"},
  {src:"09-the-rainbow.webp",title:"A moment of blessing.",desc:"A beautiful double rainbow above Bethlehem. A memory to treasure.",alt:"Double rainbow over the completed home",thumb:"The rainbow"}
 ];const storyStrip=document.getElementById("storyStrip");const storyMainImage=document.getElementById("storyMainImage");let storyIndex=0;let storyChangeToken=0;
 for(let i=0;i<story.length;i++){const chapter=story[i];const button=document.createElement("button");button.type="button";button.className="story-thumb"+(i===0?" is-active":"");button.setAttribute("aria-label",`Show chapter ${i+1}: ${chapter.thumb}`);button.setAttribute("aria-pressed",i===0?"true":"false");const image=document.createElement("img");image.src="assets/bethlehem/"+chapter.src;image.alt="";image.loading="lazy";const title=document.createElement("span");title.textContent=chapter.thumb;button.append(image,title);button.addEventListener("click",()=>setStory(i));storyStrip.append(button)}
-function setStory(i){storyIndex=(i+story.length)%story.length;const chapter=story[storyIndex];const token=++storyChangeToken;storyMainImage.classList.add("is-changing");const image=new Image();image.src="assets/bethlehem/"+chapter.src;const commit=()=>{if(token!==storyChangeToken)return;storyMainImage.src=image.src;storyMainImage.alt=chapter.alt;storyMainImage.parentElement.classList.toggle("is-portrait",chapter.src==="07-the-keys-enhanced.webp");document.getElementById("storyCount").innerHTML=String(storyIndex+1).padStart(2,"0")+` <span>/ ${String(story.length).padStart(2,"0")}</span>`;document.getElementById("storyTitle").textContent=chapter.title;document.getElementById("storyDescription").textContent=chapter.desc;storyMainImage.classList.remove("is-changing")};if(image.complete)commit();else {image.addEventListener("load",commit,{once:true});image.addEventListener("error",()=>{if(token===storyChangeToken)storyMainImage.classList.remove("is-changing")},{once:true});}const thumbs=[...storyStrip.children];thumbs.forEach((btn,j)=>{btn.classList.toggle("is-active",j===storyIndex);btn.setAttribute("aria-pressed",j===storyIndex?"true":"false")});const target=thumbs[storyIndex],r=target.getBoundingClientRect(),box=storyStrip.getBoundingClientRect();storyStrip.scrollBy({left:(r.left+r.right-box.left-box.right)/2,behavior:reduce.matches?"auto":"smooth"})}
+function setStory(i){storyIndex=(i+story.length)%story.length;const chapter=story[storyIndex];const token=++storyChangeToken;storyMainImage.classList.add("is-changing");const image=new Image();image.src="assets/bethlehem/"+chapter.src;const commit=()=>{if(token!==storyChangeToken)return;storyMainImage.src=image.src;storyMainImage.alt=chapter.alt;storyMainImage.parentElement.classList.toggle("is-keys",chapter.src==="07-the-keys-landscape-v2.webp");document.getElementById("storyCount").innerHTML=String(storyIndex+1).padStart(2,"0")+` <span>/ ${String(story.length).padStart(2,"0")}</span>`;document.getElementById("storyTitle").textContent=chapter.title;document.getElementById("storyDescription").textContent=chapter.desc;storyMainImage.classList.remove("is-changing")};if(image.complete)commit();else {image.addEventListener("load",commit,{once:true});image.addEventListener("error",()=>{if(token===storyChangeToken)storyMainImage.classList.remove("is-changing")},{once:true});}const thumbs=[...storyStrip.children];thumbs.forEach((btn,j)=>{btn.classList.toggle("is-active",j===storyIndex);btn.setAttribute("aria-pressed",j===storyIndex?"true":"false")});const target=thumbs[storyIndex],r=target.getBoundingClientRect(),box=storyStrip.getBoundingClientRect();storyStrip.scrollBy({left:(r.left+r.right-box.left-box.right)/2,behavior:reduce.matches?"auto":"smooth"})}
 document.getElementById("storyPrev").addEventListener("click",()=>setStory(storyIndex-1));document.getElementById("storyNext").addEventListener("click",()=>setStory(storyIndex+1));
 
 /* Bethlehem only. Activate with the /exec URL from the dedicated Bethlehem Apps Script.
