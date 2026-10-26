@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#280d1b">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="With grateful hearts, Sherin and Dibiya invite you to celebrate our new home, SD’s BETHLEHEM. Join us Saturday, 7 November 2026 at 6 PM in Junction Hill, NSW.">
+  <meta name="description" content="Sherin and Dibiya warmly invite you to celebrate SD’s BETHLEHEM on Saturday, 7 November 2026. Housewarming at 4 PM, followed by dinner at South Grafton Bowling Sports &amp; Recreation Club from 6 PM.">
   <title>SD’s BETHLEHEM | Sherin &amp; Dibiya</title>
   <link rel="canonical" href="https://sd-bethlehem.com/">
   <!-- Link previews for WhatsApp, Messages, Facebook and other social apps. -->
@@ -14,7 +14,7 @@
   <meta property="og:site_name" content="SD’s BETHLEHEM">
   <meta property="og:url" content="https://sd-bethlehem.com/">
   <meta property="og:title" content="You’re Invited Home 🤍 | SD’s BETHLEHEM">
-  <meta property="og:description" content="With love and gratitude, Sherin &amp; Dibiya warmly invite you to celebrate our new home. Saturday, 7 November 2026 from 6 PM in Junction Hill, NSW. We can’t wait to welcome you!">
+  <meta property="og:description" content="Please celebrate with us on Saturday, 7 November! Housewarming at SD’s BETHLEHEM, Junction Hill, 4–6 PM, then dinner at South Grafton Bowling Sports &amp; Recreation Club, 6–10 PM. With love, Sherin &amp; Dibiya.">
   <meta property="og:image" content="https://sd-bethlehem.com/assets/bethlehem/bethlehem-share-preview.jpg">
   <meta property="og:image:secure_url" content="https://sd-bethlehem.com/assets/bethlehem/bethlehem-share-preview.jpg">
   <meta property="og:image:type" content="image/jpeg">
@@ -23,7 +23,7 @@
   <meta property="og:image:alt" content="SD’s BETHLEHEM housewarming invitation with a golden sunset, rainbow and a new home">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="You’re Invited Home 🤍 | SD’s BETHLEHEM">
-  <meta name="twitter:description" content="Sherin &amp; Dibiya would love to welcome you to our new home on Saturday, 7 November 2026, from 6 PM.">
+  <meta name="twitter:description" content="Join Sherin &amp; Dibiya on 7 November: housewarming at SD’s BETHLEHEM, 4–6 PM, followed by dinner in South Grafton, 6–10 PM.">
   <meta name="twitter:image" content="https://sd-bethlehem.com/assets/bethlehem/bethlehem-share-preview.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -456,6 +456,57 @@
   #rsvpSubmit .rsvp-submit__spinner{animation:none;border-color:#46203366;border-top-color:#462033}
 }
 
+
+/* Two-stop housewarming itinerary: shared date followed by two equally weighted venues. */
+.invitation-grid--schedule{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+.invitation-grid--schedule .invitation-cell--date{
+  grid-column:1/-1;display:flex;flex-direction:row;gap:23px;align-items:center;justify-content:center;
+  padding:22px 24px 24px;background:linear-gradient(105deg,#7a3e5233,#39203555);
+  border-bottom:1px solid var(--hair)
+}
+.invitation-grid--schedule .invitation-cell--date .big{font-size:clamp(4.2rem,7vw,5.8rem);margin:0;line-height:1}
+.invitation-date-copy{text-align:left}
+.invitation-grid--schedule .invitation-cell--date .label{display:block;margin-bottom:5px}
+.invitation-grid--schedule .invitation-cell--date .small{font-size:14px;line-height:1.5;color:#f1d9c7}
+.invitation-grid--schedule .invitation-cell--venue{
+  min-width:0;padding:37px clamp(17px,3vw,35px) 40px;
+  justify-content:flex-start;align-items:center;text-align:center
+}
+.invitation-grid--schedule .invitation-cell--house{border-left:0}
+.invitation-grid--schedule .invitation-cell--dinner{border-left:1px solid var(--hair);background:linear-gradient(150deg,#5c2b3c2a,#2b13254d)}
+.invitation-grid--schedule .invitation-cell--venue .label{margin:0 0 15px;line-height:1.6}
+.invitation-grid--schedule .phase-time{
+  margin:0 0 20px;font:500 clamp(1.95rem,3.6vw,3rem)/1.1 var(--font-display);
+  color:#f6e6d2;letter-spacing:.015em
+}
+.invitation-grid--schedule .bethlehem-name{margin:0 0 9px;padding:7px 10px 11px}
+.invitation-grid--schedule .bethlehem-word{font-size:clamp(1.9rem,3.1vw,3rem)}
+.invitation-grid--schedule .dinner-venue-name{
+  color:#f4dab0;font:500 clamp(1.9rem,2.85vw,2.7rem)/1.13 var(--font-display);
+  margin:0 0 15px;max-width:18ch;text-wrap:balance;overflow-wrap:break-word
+}
+.invitation-grid--schedule .venue-support{font-size:13px;line-height:1.6;color:#edcfc9;margin:0 0 14px}
+.invitation-grid--schedule .dinner-venue-location{font-size:13px;line-height:1.6;color:#f2dbd1;margin:0 0 6px}
+.invitation-grid--schedule .address-link{line-height:1.65;font-size:13px}
+.invitation-grid--schedule .directions-link{margin-top:auto;transform:translateY(18px);max-width:100%}
+.invitation-grid--schedule .directions-link:hover{transform:translateY(16px)}
+@media(max-width:720px){
+  .invitation-grid--schedule{grid-template-columns:1fr}
+  .invitation-grid--schedule .invitation-cell--date{grid-column:1;gap:18px;padding:23px 15px}
+  .invitation-grid--schedule .invitation-cell--venue{padding:32px 22px 45px;border-left:0}
+  .invitation-grid--schedule .invitation-cell--house{border-top:0}
+  .invitation-grid--schedule .invitation-cell--dinner{border-top:1px solid var(--hair)}
+  .invitation-grid--schedule .phase-time{font-size:clamp(2.1rem,7.5vw,2.85rem)}
+  .invitation-grid--schedule .dinner-venue-name{font-size:clamp(2rem,8vw,2.8rem)}
+  .invitation-grid--schedule .bethlehem-word{font-size:clamp(2.15rem,8vw,3.05rem)}
+  .invitation-grid--schedule .directions-link{min-height:46px}
+  .hero--cinematic .hero-location{letter-spacing:.12em}
+}
+@media(max-width:380px){
+  .invitation-grid--schedule .bethlehem-word{font-size:clamp(1.9rem,8.2vw,2.35rem)}
+  .invitation-grid--schedule .invitation-cell--date .small{font-size:12px}
+}
+
 </style>
 </head>
 <body>
@@ -479,7 +530,7 @@
       <p class="hero-hosts arrival arrival--4">Sherin <span>&amp;</span> Dibiya</p>
       <span class="hero-rule arrival arrival--4" aria-hidden="true"></span>
       <p class="hero-date arrival arrival--5">07 NOVEMBER 2026</p>
-      <p class="hero-location arrival arrival--5">06:00 PM ONWARDS <span aria-hidden="true">·</span> JUNCTION HILL, NSW</p>
+      <p class="hero-location arrival arrival--5">4 PM HOUSEWARMING <span aria-hidden="true">·</span> 6 PM DINNER</p>
     </div>
     <div class="hero-bottom">
       <a class="hero-end" href="#beginning" aria-label="Scroll to the invitation"><span>SCROLL TO BEGIN</span><i aria-hidden="true"></i></a>
@@ -490,22 +541,50 @@
       <div class="story-viewer reveal" aria-label="The story of the building process"><div class="story-photo-wrap"><img id="storyMainImage" src="assets/bethlehem/01-the-land.webp" alt="The empty building plot before construction" loading="lazy"></div><div class="story-details"><p class="story-count" id="storyCount">01 <span>/ 10</span></p><h4 id="storyTitle">Where it all began.</h4><p id="storyDescription">The first steps on an empty piece of land, with a home still living in our dreams.</p><div class="story-controls"><button type="button" class="icon-btn" id="storyPrev" aria-label="Previous building stage">‹</button><button type="button" class="icon-btn" id="storyNext" aria-label="Next building stage">›</button></div></div></div>
       <div id="storyStrip" class="story-strip" aria-label="Select a chapter in the building journey"></div>
     </div></section>
-  <section id="details" class="details-section" aria-labelledby="detailsTitle"><div class="container reveal"><p class="eyebrow">02 / THE CELEBRATION</p><h2 id="detailsTitle" class="section-title">Come on in.</h2><span class="gold-line"></span><p class="intro">With grateful hearts, we welcome you to celebrate this blessing with us.</p>
-      <div class="invitation-grid"><div class="invitation-cell"><span class="label">SATURDAY · NOVEMBER</span><p class="big">07</p><p class="small" id="dateText">Saturday, 07 November 2026</p></div><div class="invitation-cell"><span class="label">THE CELEBRATION BEGINS</span><p class="big">6 PM</p><p class="small" id="timeText">06:00 PM onwards</p></div><div class="invitation-cell invitation-cell--bethlehem">
-  <span class="label">THE HOME WE CALL</span>
-  <p class="place bethlehem-name">
-    <span class="bethlehem-word">BETHLEHEM</span>
-    <span class="bethlehem-spark bethlehem-spark--one" aria-hidden="true">✦</span>
-    <span class="bethlehem-spark bethlehem-spark--two" aria-hidden="true">✧</span>
-    <span class="bethlehem-spark bethlehem-spark--three" aria-hidden="true">✦</span>
-    <span class="bethlehem-spark bethlehem-spark--four" aria-hidden="true">✧</span>
-  </p>
-  <a class="small address-link" href="https://maps.app.goo.gl/tuibJ2FptYXCDAXg7?g_st=ic" target="_blank" rel="noopener noreferrer" aria-label="Open 42 Carrs Peninsula Road, Junction Hill in Google Maps"><span id="addressText">42 Carrs Peninsula Road, Junction Hill, NSW</span></a>
-  <a class="directions-link" href="https://maps.app.goo.gl/tuibJ2FptYXCDAXg7?g_st=ic" target="_blank" rel="noopener noreferrer" aria-label="Get directions to SD's Bethlehem in Google Maps">
-    <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-    <span>Get directions</span><span class="directions-link__arrow" aria-hidden="true">↗</span>
-  </a>
-</div></div><p class="details-tag">Welcome home ♡</p></div></section>
+  <section id="details" class="details-section" aria-labelledby="detailsTitle"><div class="container reveal">
+  <p class="eyebrow">02 / THE CELEBRATION</p>
+  <h2 id="detailsTitle" class="section-title">Come on in.</h2>
+  <span class="gold-line"></span>
+  <p class="intro">A new home, a beautiful blessing, and the joy of celebrating together. We'd love to see you there.</p>
+  <div class="invitation-grid invitation-grid--schedule">
+    <div class="invitation-cell invitation-cell--date">
+      <p class="big" aria-hidden="true">07</p>
+      <div class="invitation-date-copy">
+        <span class="label">SATURDAY · NOVEMBER</span>
+        <p class="small" id="dateText">Saturday, 07 November 2026</p>
+      </div>
+    </div>
+    <div class="invitation-cell invitation-cell--venue invitation-cell--house invitation-cell--bethlehem">
+      <span class="label">01 / HOUSEWARMING PARTY</span>
+      <p class="phase-time" id="timeText">4:00 PM – 6:00 PM</p>
+      <p class="place bethlehem-name">
+        <span class="bethlehem-word">BETHLEHEM</span>
+        <span class="bethlehem-spark bethlehem-spark--one" aria-hidden="true">✦</span>
+        <span class="bethlehem-spark bethlehem-spark--two" aria-hidden="true">✧</span>
+        <span class="bethlehem-spark bethlehem-spark--three" aria-hidden="true">✦</span>
+        <span class="bethlehem-spark bethlehem-spark--four" aria-hidden="true">✧</span>
+      </p>
+      <p class="venue-support">Join us at our new home.</p>
+      <a class="small address-link" href="https://maps.app.goo.gl/tuibJ2FptYXCDAXg7?g_st=ic" target="_blank" rel="noopener noreferrer" aria-label="Open 42 Carrs Peninsula Road, Junction Hill in Google Maps"><span id="addressText">42 Carrs Peninsula Road, Junction Hill, NSW</span></a>
+      <a class="directions-link" href="https://maps.app.goo.gl/tuibJ2FptYXCDAXg7?g_st=ic" target="_blank" rel="noopener noreferrer" aria-label="Get directions to the house in Google Maps">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <span>Directions to the house</span><span class="directions-link__arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="invitation-cell invitation-cell--venue invitation-cell--dinner">
+      <span class="label">02 / DINNER</span>
+      <p class="phase-time" id="dinnerTimeText">6:00 PM – 10:00 PM</p>
+      <p class="dinner-venue-name">South Grafton Bowling Sports &amp; Recreation Club</p>
+      <p class="venue-support">We'd love to share dinner with you.</p>
+      <p class="dinner-venue-location">South Grafton, NSW</p>
+      <a class="directions-link" href="https://maps.app.goo.gl/RmcHnMBeMtZQk2DG6?g_st=iw" target="_blank" rel="noopener noreferrer" aria-label="Get directions to South Grafton Bowling Sports and Recreation Club in Google Maps">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <span>Directions to dinner</span><span class="directions-link__arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+  <p class="details-tag">Welcome home ♡</p>
+</div></section>
   <section id="rsvp" class="rsvp-section" aria-labelledby="rsvpTitle"><div class="ambient"></div><div class="container rsvp-layout"><div class="rsvp-intro reveal"><p class="eyebrow">03 / LET US KNOW</p><h2 class="section-title" id="rsvpTitle">Will you<br><em>join us?</em></h2><p>Our new home will feel even more special with you there. We hope you'll celebrate with us.</p></div><form id="rsvpForm" class="rsvp-card reveal" novalidate>
   <div class="form-field" id="guestNameField">
     <label class="field-label" for="guestName">YOUR NAME <span class="required-mark" aria-hidden="true">*</span></label>
@@ -570,9 +649,10 @@
 </audio>
 <script>
 "use strict";
-const EVENT = Object.freeze({ hosts:"Sherin & Dibiya", home:"SD’s BETHLEHEM", date:"2026-11-07T18:00:00+11:00", dateLabel:"Saturday, 07 November 2026", timeLabel:"06:00 PM onwards", address:"42 Carrs Peninsula Road", city:"Junction Hill, NSW", timezone:"Australia/Sydney" });
+const EVENT = Object.freeze({ hosts:"Sherin & Dibiya", home:"SD’s BETHLEHEM", date:"2026-11-07T16:00:00+11:00", dateLabel:"Saturday, 07 November 2026", timeLabel:"4:00 PM – 6:00 PM", dinnerTimeLabel:"6:00 PM – 10:00 PM", address:"42 Carrs Peninsula Road", city:"Junction Hill, NSW", dinnerVenue:"South Grafton Bowling Sports & Recreation Club", timezone:"Australia/Sydney" });
 document.getElementById("dateText").textContent=EVENT.dateLabel;
 document.getElementById("timeText").textContent=EVENT.timeLabel;
+document.getElementById("dinnerTimeText").textContent=EVENT.dinnerTimeLabel;
 document.getElementById("addressText").textContent=EVENT.address+", "+EVENT.city;
 const reduce=window.matchMedia("(prefers-reduced-motion: reduce)");
 if(!reduce.matches&&"IntersectionObserver" in window){document.documentElement.classList.add("js-motion");const watcher=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting){entry.target.classList.add("in-view");watcher.unobserve(entry.target)}}},{threshold:.07,rootMargin:"0px 0px -30px 0px"});document.querySelectorAll(".reveal").forEach(el=>watcher.observe(el))}
