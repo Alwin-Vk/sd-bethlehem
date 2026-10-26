@@ -507,6 +507,51 @@
   .invitation-grid--schedule .invitation-cell--date .small{font-size:12px}
 }
 
+
+/* Responsive wishes modal and carousel; keeps the Bethlehem palette and typography. */
+.wish-track{position:relative;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.wish-track .wish{scroll-snap-align:start}
+.wishes-controls .icon-btn{width:46px;height:46px;background:#3f1b2d;border-color:#e4c68c91;box-shadow:0 8px 19px #13040d40}
+#wishModal{padding:16px;overscroll-behavior:contain}
+#wishModal .modal-card{width:min(100%,520px);min-width:0;max-height:calc(100dvh - 32px);overflow-y:auto;padding:clamp(24px,4vw,40px);border:1px solid #e2bd856e;border-radius:27px;background:linear-gradient(155deg,#5b2940,#351525 85%);box-shadow:0 28px 90px #090109aa,inset 0 1px #ffffff11;scrollbar-width:thin;overscroll-behavior:contain}
+#wishModal .modal-head{align-items:flex-start;gap:12px;margin-bottom:11px}
+#wishModal .modal-heading{flex:1;min-width:0}
+#wishModal .modal-heading .eyebrow{font-size:10px;letter-spacing:.21em;margin:0 0 8px;line-height:1.6}
+#wishModal .modal-head h3{font:400 clamp(2.75rem,6vw,3.9rem)/1 var(--font-editorial);letter-spacing:-.02em;overflow-wrap:break-word}
+#wishModal .modal-close{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;border:1px solid #e3c18a78;border-radius:50%;background:#ffffff0b;color:#f8daa7;font-size:27px;line-height:1}
+#wishModal .modal-close:hover{background:#e4c68c23}
+#wishModal .wish-modal-intro{font:400 14px/1.65 var(--font-body);color:#ead0c7;max-width:38ch;margin:0 0 25px}
+#wishForm .form-field{margin:0 0 23px;min-width:0}
+#wishForm .field-label{display:flex;align-items:baseline;gap:7px;margin:0 0 10px;font-size:11px;line-height:1.5;letter-spacing:.18em}
+#wishForm .field-input{display:block;width:100%;box-sizing:border-box;margin:0;min-width:0;min-height:54px;padding:14px 16px;border:1px solid #e6c99d70;border-radius:14px;background:#4a2437;color:#fff1e6;-webkit-text-fill-color:#fff1e6;caret-color:#f0d09e;font:400 16px/1.5 var(--font-body);letter-spacing:0;-webkit-appearance:none;appearance:none;box-shadow:inset 0 1px 0 #ffffff10,0 6px 16px #14050b24;transition:border-color .2s,box-shadow .2s}
+#wishForm .field-input::placeholder{color:#cfb3bd;opacity:1;-webkit-text-fill-color:#cfb3bd}
+#wishForm .field-input:focus{outline:2px solid #edcf9a;outline-offset:2px;border-color:#eac994;box-shadow:0 0 0 3px #eac99414}
+#wishForm textarea.field-input{min-height:120px;max-height:38dvh;resize:vertical}
+#wishForm .field-error{margin:7px 2px 0;font-size:12px;line-height:1.5;color:#ffcebf}
+#wishForm .has-error .field-input{border-color:#efaa9a!important;box-shadow:0 0 0 2px #efaa9a1e}
+#wishForm .pill--gold{display:flex;align-items:center;justify-content:center;min-height:55px;margin-top:3px}
+#wishForm .note{max-width:38ch;margin:16px auto 0;padding:0 4px;line-height:1.6;color:#e2c4c3;font-size:11px}
+#wishForm .form-submit-status{font-size:12px;line-height:1.5;margin:10px auto 0}
+#wishForm input.field-input:-webkit-autofill,#wishForm input.field-input:-webkit-autofill:hover,#wishForm input.field-input:-webkit-autofill:focus{-webkit-text-fill-color:#fff1e6!important;caret-color:#f0d09e;-webkit-box-shadow:0 0 0 1000px #4a2437 inset!important;box-shadow:0 0 0 1000px #4a2437 inset!important;transition:background-color 99999s ease-out 0s}
+@media(max-width:720px){
+ .wishes-head{flex-wrap:wrap;align-items:flex-end;gap:16px}
+ .wishes-head > div:first-child{flex:1 1 195px;min-width:0}
+ .wishes-controls{margin-left:auto;align-self:flex-end}
+ .wish-track{gap:14px;scroll-padding-inline:0}
+ .wish{flex-basis:min(82vw,325px);min-height:250px;padding:26px}
+ .wish-actions{flex-direction:column;align-items:stretch;gap:12px}
+ .wish-actions .pill{width:100%;text-align:center}
+ .wish-actions .note{max-width:none;text-align:center;font-size:11px}
+ #wishModal{align-items:center;padding:12px;padding-top:max(12px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom))}
+ #wishModal .modal-card{width:100%;max-height:calc(100dvh - 24px);padding:clamp(23px,5.5vw,31px);border-radius:23px}
+ #wishModal .modal-head h3{font-size:clamp(2.65rem,10vw,3.5rem)}
+ #wishModal .wish-modal-intro{margin-bottom:22px}
+ #wishForm .form-field{margin-bottom:21px}
+ #wishForm textarea.field-input{min-height:108px}
+}
+@media(max-width:370px){.wishes-controls .icon-btn{width:43px;height:43px}#wishModal .modal-card{padding:21px 18px}#wishModal .modal-head h3{font-size:2.55rem}#wishModal .modal-heading .eyebrow{letter-spacing:.14em}}
+@media(prefers-reduced-motion:reduce){#wishForm .field-input{transition:none}}
+
 </style>
 </head>
 <body>
@@ -619,10 +664,10 @@
   <p class="rsvp-success__foot">With love, Sherin &amp; Dibiya</p>
   <button class="pill pill--outline rsvp-success__again" type="button" id="rsvpAgain">Send another RSVP</button>
 </div></div></section>
-  <section id="wishes" class="wishes-section" aria-labelledby="wishesTitle"><div class="container"><div class="wishes-head reveal"><div><p class="eyebrow">04 / FROM OUR LOVED ONES</p><h2 class="section-title" id="wishesTitle">Wishes</h2><p>Every blessing and kind word means so much to us.</p></div><div class="wishes-controls"><button type="button" id="wishPrev" class="icon-btn" aria-label="Previous wishes">‹</button><button type="button" id="wishNext" class="icon-btn" aria-label="Next wishes">›</button></div></div><div class="wish-track reveal" id="wishTrack" aria-label="Housewarming wishes"><article class="wish"><p>May this home always be full of laughter, warmth and beautiful memories.</p><strong>Sam</strong></article><article class="wish"><p>Here's to new beginnings, quiet mornings and countless blessings together.</p><strong>Jordan</strong></article><article class="wish"><p>May peace, love and joy always find their way through your door.</p><strong>Taylor</strong></article></div><div class="wish-actions reveal"><button type="button" class="pill pill--outline" id="openWish">Leave your wish ♡</button><p class="note" id="wishesDisclosure">These sample wishes are for preview. Your wish will appear here until you leave the page.</p></div></div></section>
+  <section id="wishes" class="wishes-section" aria-labelledby="wishesTitle"><div class="container"><div class="wishes-head reveal"><div><p class="eyebrow">04 / FROM OUR LOVED ONES</p><h2 class="section-title" id="wishesTitle">Wishes</h2><p>Every blessing and kind word means so much to us.</p></div><div class="wishes-controls"><button type="button" id="wishPrev" class="icon-btn" aria-label="Previous wishes">‹</button><button type="button" id="wishNext" class="icon-btn" aria-label="Next wishes">›</button></div></div><div class="wish-track reveal" id="wishTrack" aria-label="Housewarming wishes. Swipe or use the previous and next buttons to browse." aria-live="off"><article class="wish"><p>May this home always be full of laughter, warmth and beautiful memories.</p><strong>Sam</strong></article><article class="wish"><p>Here's to new beginnings, quiet mornings and countless blessings together.</p><strong>Jordan</strong></article><article class="wish"><p>May peace, love and joy always find their way through your door.</p><strong>Taylor</strong></article></div><div class="wish-actions reveal"><button type="button" class="pill pill--outline" id="openWish">Leave your wish ♡</button><p class="note" id="wishesDisclosure">These sample wishes are for preview. Your wish will appear here until you leave the page.</p></div></div></section>
 </main>
 <footer class="footer"><svg class="roof-symbol" viewBox="0 0 180 82" aria-hidden="true"><path d="M8 61L90 8 172 61M21 63L90 22 159 63M81 48H99V65H81zM90 48V65M81 56H99"/></svg><p>With love, Sherin &amp; Dibiya</p><small>SD’s BETHLEHEM · 07 NOVEMBER 2026</small></footer>
-<div class="modal" id="wishModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="wishTitle"><div class="modal-card"><div class="modal-head"><h3 id="wishTitle">Leave a wish</h3><button type="button" id="closeWish" class="modal-close" aria-label="Close wishes dialog">×</button></div><form id="wishForm" novalidate>
+<div class="modal" id="wishModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="wishTitle"><div class="modal-card"><div class="modal-head"><div class="modal-heading"><p class="eyebrow">A LITTLE LOVE FROM YOU</p><h3 id="wishTitle">Leave a wish</h3></div><button type="button" id="closeWish" class="modal-close" aria-label="Close wishes dialog">×</button></div><p class="wish-modal-intro">A few heartfelt words will make our new home even more special.</p><form id="wishForm" novalidate>
   <div class="form-field" id="wishNameField">
     <label for="wishName" class="field-label">YOUR NAME <span class="required-mark" aria-hidden="true">*</span></label>
     <input id="wishName" class="field-input" required maxlength="80" autocomplete="name" placeholder="Your name" aria-describedby="wishNameError">
@@ -814,11 +859,13 @@ function wishCard(name,wish){
  card.append(text,author);return card;
 }
 function addWish(name,wish){
+ stopWishesAutoplay();
  const blank=track.querySelector(".wish--empty");if(blank)blank.remove();
  const card=wishCard(name,wish);track.prepend(card);
  card.scrollIntoView({behavior:reduce.matches?"auto":"smooth",block:"nearest",inline:"start"});
 }
 function showWishText(text){
+ clearWishesAutoplay();
  const card=document.createElement("article");card.className="wish wish--empty";
  const p=document.createElement("p");p.textContent=text;card.append(p);
  track.replaceChildren(card);
@@ -834,7 +881,9 @@ function loadBethlehemWishes(){
   if(error){showWishText("Wishes are temporarily unavailable. You can still leave yours.");return;}
   const list=Array.isArray(data.wishes)?data.wishes:[];
   if(!list.length){showWishText("Be the first to leave a little love.");return;}
-  track.replaceChildren(...list.slice(0,100).map(x=>wishCard(String(x.name||"").slice(0,80),String(x.wish||"").slice(0,350))));
+  const wishes=list.slice(0,100).map(x=>({name:String(x.name||"").trim().slice(0,80),wish:String(x.wish||"").trim().slice(0,350)})).filter(x=>x.name&&x.wish);
+  if(!wishes.length){showWishText("Be the first to leave a little love.");return;}
+  renderWishes(shuffleWishes(wishes));
  }
  window[callback]=data=>finish(!data||data.status!=="success",data||{});
  script.onerror=()=>finish(true);
@@ -911,15 +960,82 @@ wishForm.addEventListener("submit",async event=>{
     wishForm.removeAttribute("aria-busy");
   }
 });
+
+/* The wedding invitation's shuffle-and-yield pattern adapted for Bethlehem. */
+const wishSection=document.getElementById("wishes");
+let wishesAutoplayTimer=0,wishesUserInteracted=false,wishesHoverPaused=false;
+let wishesSectionVisible=!("IntersectionObserver" in window);
+const wishCards=()=>[...track.querySelectorAll(".wish:not(.wish--empty)")];
+function shuffleWishes(list){
+ const shuffled=[...list];
+ for(let i=shuffled.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]]}
+ if(shuffled.length>1){
+  try{
+   const key="bethlehemWishesFirst";
+   const first=x=>String(x.name||"").trim()+"::"+String(x.wish||"").trim();
+   if(sessionStorage.getItem(key)===first(shuffled[0]))shuffled.push(shuffled.shift());
+   sessionStorage.setItem(key,first(shuffled[0]));
+  }catch(e){/* Session storage may be unavailable in private mode. */}
+ }
+ return shuffled;
+}
+function clearWishesAutoplay(){window.clearTimeout(wishesAutoplayTimer);wishesAutoplayTimer=0}
+function canWishesAutoplay(){
+ return wishesSectionVisible&&!wishesUserInteracted&&!wishesHoverPaused&&!document.hidden&&!reduce.matches&&
+  !modal.classList.contains("open")&&wishCards().length>1&&track.scrollWidth>track.clientWidth+6;
+}
+function nearestWishIndex(cards){
+ return cards.reduce((best,card,i)=>Math.abs(card.offsetLeft-track.scrollLeft)<Math.abs(cards[best].offsetLeft-track.scrollLeft)?i:best,0);
+}
+function scrollToWish(card){if(card)track.scrollTo({left:card.offsetLeft,behavior:reduce.matches?"auto":"smooth"})}
+function scheduleWishesAutoplay(delay=5000){
+ clearWishesAutoplay();
+ if(!canWishesAutoplay())return;
+ wishesAutoplayTimer=window.setTimeout(()=>{
+  if(!canWishesAutoplay())return;
+  const cards=wishCards();
+  scrollToWish(cards[(nearestWishIndex(cards)+1)%cards.length]);
+  scheduleWishesAutoplay(5000);
+ },delay);
+}
+function stopWishesAutoplay(){wishesUserInteracted=true;clearWishesAutoplay()}
+function renderWishes(list){
+ clearWishesAutoplay();
+ track.replaceChildren(...list.map(x=>wishCard(x.name,x.wish)));
+ if(!wishesUserInteracted)track.scrollTo({left:0,behavior:"auto"});
+ scheduleWishesAutoplay(4500);
+}
+function moveWishes(direction){
+ stopWishesAutoplay();
+ const cards=wishCards();
+ if(!cards.length)return;
+ scrollToWish(cards[Math.min(Math.max(nearestWishIndex(cards)+direction,0),cards.length-1)]);
+}
+document.getElementById("wishPrev").addEventListener("click",()=>moveWishes(-1));
+document.getElementById("wishNext").addEventListener("click",()=>moveWishes(1));
+for(const eventName of ["pointerdown","touchstart","wheel","keydown","focusin"]){
+ track.addEventListener(eventName,stopWishesAutoplay,{passive:eventName!=="keydown"&&eventName!=="focusin"});
+}
+track.addEventListener("pointerenter",()=>{if(wishesUserInteracted)return;wishesHoverPaused=true;clearWishesAutoplay()});
+track.addEventListener("pointerleave",()=>{if(wishesUserInteracted)return;wishesHoverPaused=false;scheduleWishesAutoplay(5000)});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)clearWishesAutoplay();else scheduleWishesAutoplay(4500)});
+reduce.addEventListener?.("change",()=>scheduleWishesAutoplay(4500));
+if("IntersectionObserver" in window){
+ const wishObserver=new IntersectionObserver(entries=>{
+  wishesSectionVisible=entries.some(e=>e.isIntersecting);
+  if(wishesSectionVisible)scheduleWishesAutoplay(4500);else clearWishesAutoplay();
+ },{threshold:.12});
+ wishObserver.observe(wishSection);
+}
 if(BETHLEHEM_CONNECTED){
  document.getElementById("rsvpDisclosure").textContent="Your RSVP is saved privately for Sherin and Dibiya.";
  document.getElementById("wishDisclosure").textContent="Your name and wish will be visible to everyone visiting this invitation.";
  document.getElementById("wishesDisclosure").textContent="Wishes shared by our loved ones appear here for everyone to enjoy.";
  loadBethlehemWishes();
+}else{
+ const sample=[...track.querySelectorAll(".wish")].map(c=>({name:c.querySelector("strong")?.textContent||"",wish:c.querySelector("p")?.textContent||""})).filter(x=>x.name&&x.wish);
+ renderWishes(shuffleWishes(sample));
 }
-
-function moveWishes(d){const card=track.querySelector(".wish");track.scrollBy({left:d*((card?.getBoundingClientRect().width||300)+20),behavior:reduce.matches?"auto":"smooth"})}
-document.getElementById("wishPrev").addEventListener("click",()=>moveWishes(-1));document.getElementById("wishNext").addEventListener("click",()=>moveWishes(1));let wishPaused=false;track.addEventListener("pointerenter",()=>wishPaused=true);track.addEventListener("pointerleave",()=>wishPaused=false);track.addEventListener("focusin",()=>wishPaused=true);track.addEventListener("focusout",()=>wishPaused=false);if(!reduce.matches)window.setInterval(()=>{if(wishPaused||document.hidden||modal.classList.contains("open"))return;const max=track.scrollWidth-track.clientWidth;if(max<10)return;track.scrollTo({left:track.scrollLeft>=max-8?0:Math.min(max,track.scrollLeft+330),behavior:"smooth"})},6500);
 
 // Music starts only after a visitor taps the control, including on iPhone Safari.
 const backgroundSong = document.getElementById('housewarmingAudio');
