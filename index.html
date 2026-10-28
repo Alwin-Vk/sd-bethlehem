@@ -457,17 +457,42 @@
 }
 
 
-/* Two-stop new home gathering itinerary: shared date followed by two equally weighted venues. */
+/* One date, one focal point: an outlined calendar next to the weekday/month. */
 .invitation-grid--schedule{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
 .invitation-grid--schedule .invitation-cell--date{
-  grid-column:1/-1;display:flex;flex-direction:row;gap:23px;align-items:center;justify-content:center;
-  padding:22px 24px 24px;background:linear-gradient(105deg,#7a3e5233,#39203555);
-  border-bottom:1px solid var(--hair)
+  grid-column:1/-1;display:flex;align-items:center;justify-content:center;
+  padding:clamp(25px,4vw,39px) 20px;
+  background:linear-gradient(110deg,#75374f29,#2b12253d);
+  border-bottom:1px solid var(--hair);
 }
-.invitation-grid--schedule .invitation-cell--date .big{font-size:clamp(4.2rem,7vw,5.8rem);margin:0;line-height:1}
-.invitation-date-copy{text-align:left}
-.invitation-grid--schedule .invitation-cell--date .label{display:block;margin-bottom:5px}
-.invitation-grid--schedule .invitation-cell--date .small{font-size:14px;line-height:1.5;color:#f1d9c7}
+.invitation-date-accessible{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
+}
+.invitation-date-feature{
+  display:flex;align-items:center;justify-content:center;gap:clamp(19px,3vw,29px);
+  width:min(100%,430px);min-width:0;
+}
+.invitation-calendar{
+  position:relative;flex:none;width:clamp(73px,8vw,88px);
+  aspect-ratio:88/94;color:#e8c68e;
+}
+.invitation-calendar svg{display:block;width:100%;height:100%}
+.invitation-calendar-day{
+  position:absolute;top:43%;left:50%;transform:translate(-50%,-27%);
+  font:400 clamp(2.75rem,5.1vw,3.55rem)/1 var(--font-display);
+  color:#fff1d9;letter-spacing:-.06em;
+}
+.invitation-date-copy{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
+.invitation-weekday{
+  font:600 11px/1.5 var(--font-body);letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);
+}
+.invitation-month-year{
+  font:400 clamp(1.75rem,3.5vw,2.35rem)/1.1 var(--font-display);
+  color:#f6e6d2;white-space:nowrap;
+}
+.invitation-month-year span{font-size:.8em;letter-spacing:.025em}
 .invitation-grid--schedule .invitation-cell--venue{
   min-width:0;padding:37px clamp(17px,3vw,35px) 40px;
   justify-content:flex-start;align-items:center;text-align:center
@@ -507,6 +532,35 @@
   .invitation-grid--schedule .invitation-cell--date .small{font-size:12px}
 }
 
+
+
+/* Paired venue emblems use one restrained, custom gold line-icon language. */
+.invitation-grid--schedule .venue-symbol{
+  display:grid;place-items:center;flex:none;
+  width:61px;height:61px;margin:0 0 17px;border-radius:50%;
+  color:#f0d19a;border:1px solid #e4c68c66;
+  background:radial-gradient(circle at 43% 33%,#e2ba7a1a,transparent 78%);
+  box-shadow:inset 0 1px #ffffff0b,0 9px 30px #16030d2b;
+}
+.invitation-grid--schedule .venue-symbol svg{width:29px;height:29px}
+.invitation-grid--schedule .invitation-cell--venue .label{
+  margin-bottom:14px;letter-spacing:.19em;
+}
+@media(max-width:720px){
+  .invitation-grid--schedule .invitation-cell--date{padding:29px 18px}
+  .invitation-date-feature{gap:21px}
+  .invitation-weekday{font-size:10px}
+  .invitation-month-year{font-size:clamp(1.65rem,7.1vw,2.2rem)}
+  .invitation-calendar{width:76px}
+  .invitation-calendar-day{font-size:2.85rem}
+  .invitation-grid--schedule .venue-symbol{width:57px;height:57px;margin-bottom:16px}
+}
+@media(max-width:360px){
+  .invitation-date-feature{gap:16px}
+  .invitation-calendar{width:70px}
+  .invitation-calendar-day{font-size:2.65rem}
+  .invitation-month-year{font-size:1.6rem}
+}
 
 /* Responsive wishes modal and carousel; keeps the Bethlehem palette and typography. */
 .wish-track{position:relative;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
@@ -703,13 +757,30 @@
   <p class="intro">A new home, a beautiful blessing, and the joy of celebrating together. We'd love to see you there.</p>
   <div class="invitation-grid invitation-grid--schedule">
     <div class="invitation-cell invitation-cell--date">
-      <p class="big" aria-hidden="true">07</p>
-      <div class="invitation-date-copy">
-        <span class="label">SATURDAY · NOVEMBER</span>
-        <p class="small" id="dateText">Saturday, 07 November 2026</p>
+      <time class="invitation-date-accessible" id="dateText" datetime="2026-11-07">Saturday, 07 November 2026</time>
+      <div class="invitation-date-feature" aria-hidden="true">
+        <div class="invitation-calendar">
+          <svg viewBox="0 0 88 94" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3.5" y="9.5" width="81" height="81" rx="13" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M4 35H84" stroke="currentColor" stroke-width="1.25" opacity=".65"/>
+            <path d="M26 3V18M62 3V18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+          <span class="invitation-calendar-day">07</span>
+        </div>
+        <div class="invitation-date-copy">
+          <span class="invitation-weekday">Saturday</span>
+          <span class="invitation-month-year">November <span>2026</span></span>
+        </div>
       </div>
     </div>
     <div class="invitation-cell invitation-cell--venue invitation-cell--house invitation-cell--bethlehem">
+      <span class="venue-symbol" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M4.5 14.2 16 4.8l11.5 9.4"/>
+          <path d="M7.4 12.6V26h17.2V12.6"/>
+          <path d="M13.2 26v-8.7h5.6V26"/>
+        </svg>
+      </span>
       <span class="label">01 / NEW HOME GATHERING</span>
       <p class="phase-time" id="timeText">4:00 PM – 6:00 PM</p>
       <div class="bethlehem-lockup">
@@ -730,6 +801,13 @@
       </a>
     </div>
     <div class="invitation-cell invitation-cell--venue invitation-cell--dinner">
+      <span class="venue-symbol" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+          <circle cx="16" cy="16" r="8.1"/>
+          <circle cx="16" cy="16" r="5.2" opacity=".45"/>
+          <path d="M4 5v9.2M7 5v9.2M10 5v9.2M7 14.2V27M26 5c-3.6 2.2-4.3 6.5-4.3 11.7H26V27"/>
+        </svg>
+      </span>
       <span class="label">02 / DINNER</span>
       <p class="phase-time" id="dinnerTimeText">6:00 PM – 10:00 PM</p>
       <p class="dinner-venue-name">South Grafton Bowling Sports &amp; Recreation Club</p>
