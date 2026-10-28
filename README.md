@@ -1,6 +1,6 @@
 # SD’s BETHLEHEM
 
-A standalone housewarming invitation for Sherin & Dibiya, hosted at **https://sd-bethlehem.com**.
+A standalone new home gathering invitation for Sherin & Dibiya, hosted at **https://sd-bethlehem.com**.
 
 - **When:** Saturday 7 November 2026, from 6:00 PM
 - **Where:** 42 Carrs Peninsula Road, Junction Hill, NSW, Australia
