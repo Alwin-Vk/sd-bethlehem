@@ -16,7 +16,7 @@ The spreadsheet should remain **private**. Only the Apps Script web app should a
 1. Open the Bethlehem spreadsheet (not the wedding spreadsheet).
 2. Select **Extensions > Apps Script**.
 3. Replace the starter code in **Code.gs** with the entire contents of [google-apps-script.js](./google-apps-script.js).
-4. Click **Save** and name the project **Bethlehem Housewarming Backend**.
+4. Click **Save** and name the project **Bethlehem New Home Gathering Backend**.
 5. Select **Deploy > New deployment > Web app**.
 6. Set **Execute as: Me** and **Who has access: Anyone**.
 7. Authorize access to this dedicated spreadsheet and complete the deployment.
