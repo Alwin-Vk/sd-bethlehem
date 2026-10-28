@@ -621,52 +621,41 @@
   }
 }
 
-/* Two-line hero agenda: readable, elegant, and sized to the longer first row. */
+/* The hero date has its own breathing room before a restrained two-line agenda. */
+.hero--cinematic .hero-date {
+  margin-bottom:30px;
+}
 .hero--cinematic .hero-location.hero-schedule {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:clamp(6px,1.2vw,11px);
-  width:min(100%,850px);
-  max-width:100%;
-  margin:0;
-  color:#f6e5cd;
-  font:italic 400 clamp(1.55rem,2.7vw,2.35rem)/1.16 var(--font-display);
-  letter-spacing:.015em;
-  text-align:center;
-  text-shadow:0 3px 18px #0008;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;width:100%;max-width:100%;margin:0;
+  color:#f4e5d4;text-align:center;
 }
 .hero--cinematic .hero-location.hero-schedule > .hero-schedule-line {
-  display:block;
-  max-width:100%;
-  margin:0;
-  padding:0;
-  color:inherit;
-  white-space:nowrap;
-  font:inherit;
-  letter-spacing:inherit;
+  display:flex;flex-direction:row;align-items:baseline;justify-content:center;
+  gap:13px;max-width:100%;margin:0;padding:0;white-space:nowrap;
 }
-.hero--cinematic .hero-location.hero-schedule > .hero-schedule-line--dinner {
-  font-size:1.12em;
-  color:#f5ddb6;
+.hero--cinematic .hero-location.hero-schedule .hero-schedule-time {
+  font:italic 400 clamp(1.5rem,2.5vw,2rem)/1 var(--font-editorial);
+  letter-spacing:0;color:#f5d9a8;padding:0;
+}
+.hero--cinematic .hero-location.hero-schedule .hero-schedule-label {
+  font:500 clamp(.75rem,1.08vw,.88rem)/1.4 var(--font-body);
+  letter-spacing:.12em;color:#f0e0d0;padding:0;
 }
 @media(max-width:720px) {
-  .hero--cinematic .hero-location.hero-schedule {
-    gap:8px;
-    width:100%;
-    max-width:100%;
-    font-size:clamp(1.12rem,5.8vw,1.6rem);
-    letter-spacing:0;
+  .hero--cinematic .hero-location.hero-schedule {gap:9px;}
+  .hero--cinematic .hero-location.hero-schedule > .hero-schedule-line {gap:11px;}
+  .hero--cinematic .hero-location.hero-schedule .hero-schedule-time {
+    font-size:clamp(1.43rem,6.4vw,1.7rem);
   }
-  .hero--cinematic .hero-location.hero-schedule > .hero-schedule-line--dinner {
-    font-size:1.25em;
+  .hero--cinematic .hero-location.hero-schedule .hero-schedule-label {
+    font-size:clamp(.7rem,3vw,.83rem);letter-spacing:.085em;
   }
 }
 @media(max-width:360px) {
-  .hero--cinematic .hero-location.hero-schedule {
-    font-size:clamp(1.05rem,5.65vw,1.25rem);
-    gap:6px;
+  .hero--cinematic .hero-location.hero-schedule .hero-schedule-time {font-size:1.4rem;}
+  .hero--cinematic .hero-location.hero-schedule .hero-schedule-label {
+    font-size:.69rem;letter-spacing:.06em;
   }
 }
 
@@ -694,8 +683,8 @@
       <span class="hero-rule arrival arrival--4" aria-hidden="true"></span>
       <p class="hero-date arrival arrival--5">07 NOVEMBER 2026</p>
       <p class="hero-location hero-schedule arrival arrival--5">
-        <span class="hero-schedule-line">4 PM NEW HOME GATHERING</span>
-        <span class="hero-schedule-line hero-schedule-line--dinner">6 PM DINNER</span>
+        <span class="hero-schedule-line"><span class="hero-schedule-time">4 PM</span><span class="hero-schedule-label">NEW HOME GATHERING</span></span>
+        <span class="hero-schedule-line"><span class="hero-schedule-time">6 PM</span><span class="hero-schedule-label">DINNER</span></span>
       </p>
     </div>
     <div class="hero-bottom">
