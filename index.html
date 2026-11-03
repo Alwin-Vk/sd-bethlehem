@@ -713,6 +713,40 @@
   }
 }
 
+
+/* Wishes: readable swipe cards and consistently aligned leave-a-wish form on small phones. */
+.wish-track{scroll-padding-inline:1px}
+.wish-track .wish{box-sizing:border-box}
+.wish-actions{justify-content:center}
+#wishModal .modal-head{display:flex;align-items:flex-start;justify-content:space-between}
+#wishModal .modal-heading{min-width:0}
+#wishForm{display:flex;flex-direction:column;min-width:0;width:100%}
+#wishForm .form-field{width:100%;min-width:0}
+#wishForm .field-label{display:flex;align-items:baseline;flex-wrap:wrap;text-align:left}
+#wishForm .field-input{width:100%;max-width:100%;border-radius:14px}
+#wishForm .pill--gold{width:100%;box-sizing:border-box}
+#wishForm .note{text-align:center}
+@media(max-width:720px){
+ .wishes-head{align-items:center}
+ .wishes-controls{align-self:center}
+ .wish-actions{margin-top:20px}
+ .wish-actions .pill{display:flex;align-items:center;justify-content:center;min-height:50px}
+ #wishModal{box-sizing:border-box;overflow-y:auto}
+ #wishModal .modal-card{box-sizing:border-box;max-width:100%;margin:auto;overflow-x:hidden}
+ #wishModal .modal-head{gap:10px}
+ #wishModal .modal-head h3{font-size:clamp(2.35rem,9vw,3.25rem);line-height:1.08}
+ #wishModal .modal-close{flex-shrink:0}
+ #wishForm .form-field{margin-bottom:20px}
+ #wishForm .field-label{margin-bottom:9px;line-height:1.45}
+ #wishForm .field-input{font-size:16px;line-height:1.5}
+ #wishForm textarea.field-input{min-height:116px}
+ #wishForm .pill--gold{min-height:54px}
+}
+@media(max-width:380px){
+ .wish{flex-basis:min(82vw,310px);padding:22px}
+ #wishModal .modal-card{padding:22px 18px}
+ #wishModal .modal-head h3{font-size:2.4rem}
+}
 </style>
 </head>
 <body>
@@ -1174,17 +1208,19 @@ function canWishesAutoplay(){
  return wishesSectionVisible&&!wishesUserInteracted&&!wishesHoverPaused&&!document.hidden&&!reduce.matches&&
   !modal.classList.contains("open")&&wishCards().length>1&&track.scrollWidth>track.clientWidth+6;
 }
+function wishLeft(card){return card.getBoundingClientRect().left-track.getBoundingClientRect().left+track.scrollLeft;}
 function nearestWishIndex(cards){
- return cards.reduce((best,card,i)=>Math.abs(card.offsetLeft-track.scrollLeft)<Math.abs(cards[best].offsetLeft-track.scrollLeft)?i:best,0);
+ return cards.reduce((best,card,i)=>Math.abs(wishLeft(card)-track.scrollLeft)<Math.abs(wishLeft(cards[best])-track.scrollLeft)?i:best,0);
 }
-function scrollToWish(card){if(card)track.scrollTo({left:card.offsetLeft,behavior:reduce.matches?"auto":"smooth"})}
+function scrollToWish(card){if(card)track.scrollTo({left:wishLeft(card),behavior:reduce.matches?"auto":"smooth"})}
 function scheduleWishesAutoplay(delay=5000){
  clearWishesAutoplay();
  if(!canWishesAutoplay())return;
  wishesAutoplayTimer=window.setTimeout(()=>{
   if(!canWishesAutoplay())return;
   const cards=wishCards();
-  scrollToWish(cards[(nearestWishIndex(cards)+1)%cards.length]);
+  const next=(nearestWishIndex(cards)+1)%cards.length;
+  scrollToWish(cards[next]);
   scheduleWishesAutoplay(5000);
  },delay);
 }
@@ -1193,7 +1229,7 @@ function renderWishes(list){
  clearWishesAutoplay();
  track.replaceChildren(...list.map(x=>wishCard(x.name,x.wish)));
  if(!wishesUserInteracted)track.scrollTo({left:0,behavior:"auto"});
- scheduleWishesAutoplay(4500);
+ window.requestAnimationFrame(()=>scheduleWishesAutoplay(4500));
 }
 function moveWishes(direction){
  stopWishesAutoplay();
